@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class changeColor : MonoBehaviour
 {
     private float hue, saturation, value;
-    private bool abilitate_change_color = false, first_change_color = false, hide_GUI = false;
+    private bool abilitate_change_color = false, first_change_color = false;
     private string material_selector;
 
     public Material material_prefab_UP, material_prefab_DOWN, material_prefab_LEFT, material_prefab_RIGHT;

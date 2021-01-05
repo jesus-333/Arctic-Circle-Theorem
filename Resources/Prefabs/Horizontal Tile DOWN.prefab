@@ -93,6 +93,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Arrow
       objectReference: {fileID: 0}
+    - target: {fileID: 4551658360316845275, guid: 1b48ae5206aea8940a3e614bf82577bc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7610355054021313398, guid: 1b48ae5206aea8940a3e614bf82577bc, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.7071068

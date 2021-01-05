@@ -34,9 +34,9 @@ public class TileGrid : MonoBehaviour
                     this.increaseSize();
                     if(debug_var){print("END - Increase size\n");}
 
-                    if(debug_var){print("START - Draw grid");}
-                    this.drawGrid();
-                    if(debug_var){print("END - Draw grid");}
+                    // if(debug_var){print("START - Draw grid");}
+                    // this.drawGrid();
+                    // if(debug_var){print("END - Draw grid");}
 
                     if(debug_var){print("START - Delete colliding tiles and move tiles");}
                     this.deleteCollidingTilesAndmoveTiles();
