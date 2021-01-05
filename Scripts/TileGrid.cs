@@ -5,10 +5,10 @@ using UnityEngine;
 public class TileGrid : MonoBehaviour
 {
     private int size = 2, point_counter = 0;
-    public float line_width = 0.1f, update_time = 1;
-    private float x_tiles_finder = -0.5f, y_tiles_finder = 0.5f, track_update_time, wait_time = 1f;
+    public float line_width = 0.1f;
+    private float x_tiles_finder = -0.5f, y_tiles_finder = 0.5f;
     private int tiles_counter = 0;
-    private bool first_section = true, second_section = false, start_new_cycle = true;
+    private bool first_section = true;
 
     public GameObject prefab_UP, prefab_DOWN, prefab_LEFT, prefab_RIGHT, tiles_finder;
     public Material line_material;
@@ -22,7 +22,6 @@ public class TileGrid : MonoBehaviour
     void Start()
     {
         this.size = 0;
-        track_update_time = update_time;
     }
 
     void Update()
@@ -215,38 +214,8 @@ public class TileGrid : MonoBehaviour
                         }
                     }
                 }
-
-                // Move TWO step down and reset x coordinate
-                // tiles_finder.transform.position = new Vector3(x_tiles_finder, tiles_finder.transform.position.y - 2f, 0);
-
             } // END CYCLE to checl tiles
-
         } // END IF
-    }
-
-    // Consider the position as the upper left corner of a square return true if in the square there's no tiles
-    bool checkSurroundingPosition(){
-        Vector3 original_position = tiles_finder.transform.position;
-        // print("tiles_finder.GetComponent<TilesFinder>().touch_tile = " + tiles_finder.GetComponent<TilesFinder>().touch_tile);
-        // Upper left corner (current position)
-        if(tiles_finder.GetComponent<TilesFinder>().touch_tile){ return false; }
-
-        // Upper right corner
-        tiles_finder.transform.position = tiles_finder.transform.position + move_right;
-        if(tiles_finder.GetComponent<TilesFinder>().touch_tile){ return false; }
-        tiles_finder.transform.position = original_position;
-
-        // Lower left corner
-        tiles_finder.transform.position = tiles_finder.transform.position + move_down;
-        if(tiles_finder.GetComponent<TilesFinder>().touch_tile){ return false; }
-        tiles_finder.transform.position = original_position;
-
-        // Lower right corner
-        tiles_finder.transform.position = tiles_finder.transform.position + move_down + move_right;
-        if(tiles_finder.GetComponent<TilesFinder>().touch_tile){ return false; }
-        tiles_finder.transform.position = original_position;
-
-        return true;
     }
 
     bool checkSurroundingPositionWithDict(){
