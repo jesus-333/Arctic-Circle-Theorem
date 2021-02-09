@@ -6,7 +6,7 @@ public class TileGrid : MonoBehaviour
 {
     private int size = 2, point_counter = 0;
     public float line_width = 0.1f;
-    private float x_tiles_finder = -0.5f, y_tiles_finder = 0.5f;
+    private float x_tiles_finder = -0.5f, y_tiles_finder = 0.5f, time_counter;
     private int tiles_counter = 0;
     private bool first_section = true;
 
@@ -22,11 +22,15 @@ public class TileGrid : MonoBehaviour
     void Start()
     {
         this.size = 0;
+        time_counter = 0;
     }
 
     void Update()
     {
-        if (Input.GetKey("space"))
+        time_counter += Time.deltaTime;
+
+        if (Input.GetKey("space") && time_counter > 0)
+        // if (time_counter > 0)
         {
 
                 if(first_section){
@@ -46,6 +50,8 @@ public class TileGrid : MonoBehaviour
                     this.updateTilesPositionDictionary();
                     this.fillVoidWithTiles();
                     if(debug_var){print("END - Fill void\n");}
+
+                    time_counter = 0;
                 }
 
                 first_section = !first_section;
@@ -109,9 +115,10 @@ public class TileGrid : MonoBehaviour
     bool checkCollision(GameObject tile)
     {
         Vector3 tile_position = tile.transform.position, key;
+        GameObject tmp_object;
         if(tile.transform.name.Contains("UP")){
             key = tile_position + move_up;
-            if(tiles_position_dictionary.ContainsKey(key)){
+            if(tiles_position_dictionary.TryGetValue(key, out tmp_object)){
                 Destroy(tile);
                 Destroy(tiles_position_dictionary[key]);
                 //tiles_position_dictionary.Remove(key);
@@ -119,7 +126,7 @@ public class TileGrid : MonoBehaviour
             }
         } else if(tile.transform.name.Contains("DOWN")){
             key = tile_position + move_down;
-            if(tiles_position_dictionary.ContainsKey(key)){
+            if(tiles_position_dictionary.TryGetValue(key, out tmp_object)){
                 Destroy(tile);
                 Destroy(tiles_position_dictionary[key]);
                 //tiles_position_dictionary.Remove(key);
@@ -127,7 +134,7 @@ public class TileGrid : MonoBehaviour
             }
         } else if(tile.transform.name.Contains("LEFT")){
             key = tile_position + move_left;
-            if(tiles_position_dictionary.ContainsKey(key)){
+            if(tiles_position_dictionary.TryGetValue(key, out tmp_object)){
                 Destroy(tile);
                 Destroy(tiles_position_dictionary[key]);
                 //tiles_position_dictionary.Remove(key);
@@ -135,7 +142,7 @@ public class TileGrid : MonoBehaviour
             }
         } else if(tile.transform.name.Contains("RIGHT")){
             key = tile_position + move_right;
-            if(tiles_position_dictionary.ContainsKey(key)){
+            if(tiles_position_dictionary.TryGetValue(key, out tmp_object)){
                 Destroy(tile);
                 Destroy(tiles_position_dictionary[key]);
                 //tiles_position_dictionary.Remove(key);
@@ -220,20 +227,21 @@ public class TileGrid : MonoBehaviour
 
     bool checkSurroundingPositionWithDict(){
         Vector3 key, position;
+        GameObject tmp_object;
 
         // UP - DOWN Couple
         position = tiles_finder.transform.position;
         key = position + new Vector3(0.5f, 0, 0);
-        if(tiles_position_dictionary.ContainsKey(key)){ return false; }
+        if(tiles_position_dictionary.TryGetValue(key, out tmp_object)){ return false; }
         key = position - new Vector3(0.5f, 0, 0);
-        if(tiles_position_dictionary.ContainsKey(key)){ return false; }
+        if(tiles_position_dictionary.TryGetValue(key, out tmp_object)){ return false; }
 
         // LEFT - RIGHT Couple
         position = tiles_finder.transform.position;;
         key = position + new Vector3(0, 0.5f, 0);
-        if(tiles_position_dictionary.ContainsKey(key)){ return false; }
+        if(tiles_position_dictionary.TryGetValue(key, out tmp_object)){ return false; }
         key = position - new Vector3(0, 0.5f, 0);
-        if(tiles_position_dictionary.ContainsKey(key)){ return false; }
+        if(tiles_position_dictionary.TryGetValue(key, out tmp_object)){ return false; }
 
 
         return true;
