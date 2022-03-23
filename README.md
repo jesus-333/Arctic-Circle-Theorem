@@ -5,4 +5,4 @@ Together the theorem implementation I had a simple GUI that allow to change the 
 
 Inspired by [this Matholeger video](https://www.youtube.com/watch?v=Yy7Q8IWNfHM&t=1051s).
 
-![![Visual example](https://www.youtube.com/watch?v=CIn6HWjbdXU)](example.png)
+[![Visual example](example.png)](https://www.youtube.com/watch?v=CIn6HWjbdXU)
